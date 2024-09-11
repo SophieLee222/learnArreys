@@ -7,13 +7,17 @@ public class StatsService {
 
     //1 - Сумма всех продаж
     public long calculateSum(long[] sales) {
-        long salesSum = Arrays.stream(sales).sum();
+        long salesSum = 0;
+        for (int i = 0; i < sales.length; i++) {
+            salesSum = salesSum + sales[i];
+        }
         return salesSum;
     }
 
     //2 - Среднее значение суммы всех продаж
     public double calculateAverage(long[] sales) {
-        double salesAverage = Arrays.stream(sales).average().getAsDouble();
+        long salesSum = calculateSum(sales);
+        double salesAverage = salesSum / sales.length;
         return salesAverage;
     }
 
@@ -44,7 +48,7 @@ public class StatsService {
     }
 
     //5 - Кол-во месяцев, когда продажи ниже среднего
-    public int countMonthsBelowAverage (long[] sales) {
+    public int countMonthsBelowAverage(long[] sales) {
         double salesAverage = calculateAverage(sales);
         int countBelowAverage = 0;
         for (int i = 0; i < sales.length; i++) {
@@ -56,7 +60,7 @@ public class StatsService {
     }
 
     //6 - Кол-во месяцев, когда продажи выше среднего
-    public int countMonthsAboveAverage (long[] sales) {
+    public int countMonthsAboveAverage(long[] sales) {
         double salesAverage = calculateAverage(sales);
         int countAboveAverage = 0;
         for (int i = 0; i < sales.length; i++) {
